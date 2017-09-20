@@ -41,19 +41,41 @@ d3.decompose('translate(20,100) rotate(40) scale(12)')
 decompose('translate(20,100) rotate(40) scale(12)')
 ```
 
-With **d3-transform**, you can rewrite the above code like this:
+**d3-decompose** allows you to manipulate transform strings on elements.
 
 ```javascript
-var transform = d3.transform()
-    .translate(function(d) { return [20, d.size * 10] })
-    .rotate(40)
-    .scale(function(d) { return d.size + 2 });
+  var svg = d3.select('svg.example');
 
-var svg = d3.select('svg').selectAll('g')
-    .data([{ size: 5 }, { size: 10 }])
+  // Create a rectangle with an initial transform
+  svg.selectAll('rect')
+    .data([{ size: 5 }])
     .enter()
-    .append('g')
-    .attr('transform', transform);
+    .append('rect')
+    .attr('fill', 'red')
+    .attr('width', function(d) { return d.size })
+    .attr('height', function(d) { return d.size })
+    .attr('transform', 'translate(100, 100) scale(1)');
+
+  // Create a new transform and use it, keeping the original translate transform
+  svg.selectAll('rect')
+    .transition()
+    .attr('transform', function(d) {
+      // Store the old transform decomposed to an object
+      var existingTransform = d3.decompose(this.getAttribute('transform'));
+
+      // Create a new transform
+      var updateTransformString = d3.decompose('scale(10) rotate(90)');
+
+      // Preserve the original transform translation, but overwrite with our new transformation properties
+      var newTransformString = existingTransform.translate + ' ' + updateTransformString;
+
+      console.log(existingTransform);
+      console.log(updateTransformString);
+      console.log(newTransformString);
+
+      return newTransformString;
+    })
+    .duration(3000);
 ```
 
 ## Contributors
