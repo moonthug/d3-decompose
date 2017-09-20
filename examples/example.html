@@ -1,0 +1,54 @@
+<html>
+<head>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="build/d3-decompose.js"></script>
+</head>
+<body>
+
+<svg class="example1"></svg>
+
+<script>
+    console.log(d3.decompose('translate(20,100)');
+    console.log(d3.decompose('translate(20,100) rotate(40) scale(12)', false));
+</script>
+
+<svg class="example2"></svg>
+
+<script>
+  var svg = d3.select('svg.example2');
+
+  svg.selectAll('rect')
+    .data([{ size: 5 }])
+    .enter()
+    .append('rect')
+    .attr('fill', 'red')
+    .attr('width', function(d) { return d.size })
+    .attr('height', function(d) { return d.size })
+    .attr('transform', 'translate(100, 100) scale(1)');
+
+
+  svg.selectAll('rect')
+    .transition()
+    .attr('transform', function(d) {
+      // Store the old transform decomposed to an object
+      var existingTransform = d3.decompose(this.getAttribute('transform'));
+
+      // Create a new transform
+      var updateTransformString = d3.decompose('scale(10) rotate(90)');
+
+      // Preserve the original transform translation, but overwrite with our new transformation properties
+      var newTransformString = existingTransform.translate + ' ' + updateTransformString;
+
+      console.log(existingTransform);
+      console.log(updateTransformString);
+      console.log(newTransformString);
+
+      return newTransformString;
+    })
+    .duration(3000);
+
+</script>
+
+
+</body>
+</html>

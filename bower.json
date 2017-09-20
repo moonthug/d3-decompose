@@ -1,0 +1,26 @@
+{
+  "name": "d3-decompose",
+  "version": "1.0.0",
+  "homepage": "https://github.com/moonthug/d3-decompose",
+  "authors": [
+    "Alex Coulcher <alex@polyglot.rodeo>"
+  ],
+  "description": "Addon to d3.js that can decompose SVG/CSS transform strings",
+  "main": ["src/d3-decompose.js"],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "d3",
+    "svg",
+    "transform"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
