@@ -1,6 +1,6 @@
 {
   "name": "d3-decompose",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Addon to d3.js that can decompose SVG/CSS transform strings",
   "main": "build/d3-decompose.js",
   "module": "build/d3-decompose.mjs",

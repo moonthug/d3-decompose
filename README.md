@@ -1,6 +1,8 @@
 # D3-Decompose
 
-**d3-decompose** takes SVG or CSS3 transform strings and converts them into usable objects.
+**d3-decompose** takes SVG or CSS3 transform strings and converts them into usable values.
+
+A use case for this project was manipulating the the rotation of a `<text>` without changing the translation.
 
 ## Installation
 
@@ -25,6 +27,30 @@ const decompose = require('d3-decompose')
 
 
 ## Usage
+
+The `decompose` function takes a string input `'translate(100)'` and returns an object of the values.
+
+```javascript
+decompose('translate(-200, 1) scale(1.5,1.2)');
+
+{
+  translate: 'translate(-200, 1)',
+  scale: 'scale(1.5, 1.2)'
+}
+```
+
+It can also be used to return the values in an array form instead of the default strings.
+
+```javascript
+decompose('translate(-200, 1) scale(1.5,1.2)', false);
+
+{
+  translate: ['-200', '1'],
+  scale: ['1.5', '1.2']
+}
+```
+
+
 
 ### HTML
 
